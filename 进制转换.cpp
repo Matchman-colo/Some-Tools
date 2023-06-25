@@ -1,3 +1,8 @@
+/*************
+*Decimal conversion
+*By Matchman-colo
+*Continuous improvement
+*************/
 #include<iostream>
 #include<cstring>
 #include<sstream>
@@ -17,52 +22,52 @@ int main()
 {
 	int choice = 0;
 	cout << '\n' << 
-	"¶þ½øÖÆ×ªÊ®½øÖÆ:1   \
-	Ê®½øÖÆ×ª¶þ½øÖÆ:2    \
-	¶þ½øÖÆ×ªÊ®Áù½øÖÆ:3  \
-	Ê®Áù½øÖÆ×ª¶þ½øÖÆ:4" << endl << "ÇëÊäÈëÄúµÄÑ¡Ôñ£º";
+	"äºŒè¿›åˆ¶è½¬åè¿›åˆ¶:1   \
+	åè¿›åˆ¶è½¬äºŒè¿›åˆ¶:2    \
+	äºŒè¿›åˆ¶è½¬åå…­è¿›åˆ¶:3  \
+	åå…­è¿›åˆ¶è½¬äºŒè¿›åˆ¶:4" << endl << "è¯·è¾“å…¥æ‚¨çš„é€‰æ‹©ï¼š";
 	cin >> choice;
 	switch (choice) {
 		case 1: {
 			string bin;
-			cout << "ÇëÊäÈë¶þ½øÖÆÊý£º";
+			cout << "è¯·è¾“å…¥äºŒè¿›åˆ¶æ•°ï¼š";
 			cin >> bin;
 			if (judgeBin(bin))
 				cout << binToDec(bin) << endl;
 			else
-				cout << "ÇëÊäÈëÓÐÐ§µÄ¶þ½øÖÆÊý" << endl;
+				cout << "è¯·è¾“å…¥æœ‰æ•ˆçš„äºŒè¿›åˆ¶æ•°" << endl;
 			break;
 		}
 		case 2: {
 			int dec = 0;
-			cout << "ÇëÊäÈëÊ®½øÖÆÊý£º";
+			cout << "è¯·è¾“å…¥åè¿›åˆ¶æ•°ï¼š";
 			cin >> dec;
 			cout << decToBin(dec) << endl;
 			break;
 		}
 		case 3: {
 			string bin;
-			cout << "ÇëÊäÈë¶þ½øÖÆÊý£º";
+			cout << "è¯·è¾“å…¥äºŒè¿›åˆ¶æ•°ï¼š";
 			cin >> bin;
 			if (judgeBin(bin))
 				cout << binToHex(bin) << endl;
 			else
-				cout << "ÇëÊäÈëÓÐÐ§µÄ¶þ½øÖÆÊý" << endl;
+				cout << "è¯·è¾“å…¥æœ‰æ•ˆçš„äºŒè¿›åˆ¶æ•°" << endl;
 			break;
 		}
 		case 4: {
 			string hex;
-			cout << "ÇëÊäÈëÊ®Áù½øÖÆÊý£º";
+			cout << "è¯·è¾“å…¥åå…­è¿›åˆ¶æ•°ï¼š";
 			cin >> hex;
 			if(judgeHex(hex))
 				cout << hexToBin(hex) << endl;
 			else
-				cout << "ÇëÊäÈëÓÐÐ§µÄÊ®Áù½øÖÆÊý" << endl;
+				cout << "è¯·è¾“å…¥æœ‰æ•ˆçš„åå…­è¿›åˆ¶æ•°" << endl;
 			break;
 		}
 
 		default:
-			cout << "ÇëÊäÈëÓÐÐ§Êý×Ö" << endl;
+			cout << "è¯·è¾“å…¥æœ‰æ•ˆæ•°å­—" << endl;
 	}
 	return 0;
 }
