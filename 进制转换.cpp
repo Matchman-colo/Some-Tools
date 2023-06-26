@@ -1,7 +1,7 @@
 /*************
 *Decimal conversion
 *By Matchman-colo
-*Continuous improvement
+*Continuous improving
 *************/
 #include<iostream>
 #include<cstring>
@@ -17,15 +17,16 @@ string decToBin(int dec);
 int binToDec(string bin);
 string binToHex(string bin);
 string hexToBin(string hex);
+string decToHex(long long dec);
+long long hexToDec(string hex);
 
 int main()
 {
 	int choice = 0;
-	cout << '\n' << 
-	"二进制转十进制:1   \
-	十进制转二进制:2    \
-	二进制转十六进制:3  \
-	十六进制转二进制:4" << endl << "请输入您的选择：";
+	cout << '\n';
+	cout << "二进制转十进制:1      十进制转二进制:3      十六进制转二进制:5" << endl;
+	cout << "二进制转十六进制:2    十进制转十六进制:4    十六进制转十进制:6" << endl;
+	cout << "请输入您的选择：";
 	cin >> choice;
 	switch (choice) {
 		case 1: {
@@ -39,13 +40,6 @@ int main()
 			break;
 		}
 		case 2: {
-			int dec = 0;
-			cout << "请输入十进制数：";
-			cin >> dec;
-			cout << decToBin(dec) << endl;
-			break;
-		}
-		case 3: {
 			string bin;
 			cout << "请输入二进制数：";
 			cin >> bin;
@@ -55,17 +49,40 @@ int main()
 				cout << "请输入有效的二进制数" << endl;
 			break;
 		}
+		case 3: {
+			int dec = 0;
+			cout << "请输入十进制数：";
+			cin >> dec;
+			cout << decToBin(dec) << endl;
+			break;
+		}
 		case 4: {
+			long long dec = 0;
+			cout << "请输入十进制数：";
+			cin >> dec;
+			cout << decToHex(dec) << endl;
+			break;
+		}
+		case 5: {
 			string hex;
 			cout << "请输入十六进制数：";
 			cin >> hex;
-			if(judgeHex(hex))
+			if (judgeHex(hex))
 				cout << hexToBin(hex) << endl;
 			else
 				cout << "请输入有效的十六进制数" << endl;
 			break;
 		}
-
+		case 6: {
+			string hex;
+			cout << "请输入十六进制数：";
+			cin >> hex;
+			if (judgeHex(hex))
+				cout << hexToDec(hex) << endl;
+			else
+				cout << "请输入有效的十六进制数" << endl;
+			break;
+		}
 		default:
 			cout << "请输入有效数字" << endl;
 	}
@@ -91,7 +108,7 @@ bool judgeHex(string hex) {
 				break;
 			}
 			if (j <= 5) {
-				if (i == 1 && ch == 'x') {
+				if (i == 1 && (ch == 'x'||ch=='X')) {
 					tag = 1;
 					break;
 				}
@@ -177,7 +194,7 @@ string binToHex(string bin)
 string hexToBin(string hex)
 {
 	ostringstream bin;
-	if (hex[0] == '0' && hex[1] == 'x') {
+	if (hex[0] == '0' && (hex[1] == 'x' || hex[1] == 'X')) {
 		string newHex;
 		for (int i = 2; i < hex.size(); i++) {
 			newHex += hex[i];
@@ -217,4 +234,62 @@ string hexToBin(string hex)
 		}
 	}
 	return bin.str();
+}
+
+string decToHex(long long dec)
+{
+	int quotient = dec, remainder = 0;
+	char ch;
+	ostringstream hex;
+	string newHex;
+ 	while (quotient) {
+		remainder = quotient % 16;
+		quotient = quotient >> 4;
+		switch (remainder) {
+			case 10: ch = 'A'; break;
+			case 11: ch = 'B'; break;
+			case 12: ch = 'C'; break;
+			case 13: ch = 'D'; break;
+			case 14: ch = 'E'; break;
+			case 15: ch = 'F'; break;
+			default: ch = remainder + '0'; break;
+		}
+		hex << ch;
+	}
+	newHex = hex.str();
+	reverse(newHex.begin(), newHex.end());
+	return newHex;
+}
+
+long long hexToDec(string hex)
+{
+	int dec = 0;
+	if (hex[0] == '0' && (hex[1] == 'x' || hex[1] =='X')) {
+		string newHex;
+		for (int i = 2; i < hex.size(); i++) {
+			newHex += hex[i];
+		}
+		hex = newHex;
+	}
+	for (int i = 0; i < hex.size(); i++) {
+		int mid = 0;
+		char ch = hex[i];
+		switch (ch) {
+			case 'a':
+			case 'A': mid = 10 * pow(16, hex.size() - 1 - i); break;
+			case 'b':
+			case 'B': mid = 11 * pow(16, hex.size() - 1 - i); break;
+			case 'c':
+			case 'C': mid = 12 * pow(16, hex.size() - 1 - i); break;
+			case 'd':
+			case 'D': mid = 13 * pow(16, hex.size() - 1 - i); break;
+			case 'e':
+			case 'E': mid = 14 * pow(16, hex.size() - 1 - i); break;
+			case 'f':
+			case 'F': mid = 15 * pow(16, hex.size() - 1 - i); break;
+			default: mid = (ch - '0') * pow(16, hex.size() - 1 - i);
+		}
+		dec += mid;
+	}
+	return dec;
 }
